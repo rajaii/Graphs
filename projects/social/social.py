@@ -8,8 +8,9 @@ class User:
 class SocialGraph:
     def __init__(self):
         self.last_id = 0
-        self.users = {}
-        self.friendships = {}
+        self.users = {1,2,3,4,5,6,7,8,9,10}#set back to empty
+        self.friendships = {1: {8, 10, 5}, 2: {10, 5, 7}, 3: {4}, 4: {9, 3},
+5: {8, 1, 2}, 6: {10}, 7: {2}, 8: {1, 5}, 9: {4}, 10: {1, 2, 6}}#set back to empty
 
     def add_friendship(self, user_id, friend_id):
         """
@@ -129,14 +130,24 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         visited.update({user_id: [user_id]})
-        for i in self.friendships:
+        # for i in self.friendships:
+        #     if self.bfs(user_id, i) == None:
+        #         continue
+        #     if self.bfs(user_id, i)[0] == user_id:
+        #         visited.update({i: self.bfs(user_id, i)})
+            
+            
+        for i in self.friendships:    
             if user_id in self.friendships[i]:
                 visited.update({i: self.bfs(user_id, i)})
                 for num in self.friendships[i]:
                     if num in visited:
                         continue
-                    visited.update({num: self.bfs(user_id, num)})
-                    
+                        visited.update({num: self.bfs(user_id, num)})
+            if self.bfs(user_id, i) == None:
+                continue
+            if user_id not in self.friendships[i] and self.bfs(user_id, i)[0] == user_id:
+                visited.update({i: self.bfs(user_id, i)})
 
 
         return visited
@@ -144,7 +155,7 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
-    print(sg.friendships)
+    # sg.populate_graph(10, 2)
+    print(sg.friendships) 
     connections = sg.get_all_social_paths(1)
     print(connections)
