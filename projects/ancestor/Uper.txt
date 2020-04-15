@@ -1,0 +1,33 @@
+dft
+
+returns their earliest known ancestor – the one at the farthest 
+distance from the input individual. If there is more than one
+ancestor tied for "earliest", return the one with the lowest 
+numeric ID. If the input individual has no parents, the 
+function should return -1.
+(parent, child)
+10
+ /
+1   2   4  11
+ \ /   / \ /
+  3   5   8
+   \ / \   \
+    6   7   9
+
+P:
+initiate graph
+append all values into the graph vertex and then edges
+
+run a dfs on the  graph and find the one looked for longest path
+to input
+
+
+
+
+e:
+see file
+
+r:
+maybe add ifs in for loops when addign vertexs and edges to clean up and 
+run less ie no redundant vertices added
+
