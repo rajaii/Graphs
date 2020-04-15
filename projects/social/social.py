@@ -1,3 +1,6 @@
+import random
+from util import Queue
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -75,7 +78,46 @@ class SocialGraph:
         # `add_friendship(2, 1)`. You should avoid calling one after
         # the other since it will do nothing but print a warning. You
         # can avoid this by only creating friendships where user1 < user2.
-        
+
+    def bfs(self, starting_vertex, destination_vertex):
+        """
+        Return a list containing the shortest path from
+        starting_vertex to destination_vertex in
+        breath-first order.
+        """
+        #Create a queue and enqueue starting vertex
+        qq = Queue()
+        qq.enqueue([starting_vertex])
+        #create a set of traversed vertices
+        visited = set()
+        #while queue is not empty
+        while qq.size() > 0:
+            # dequue/pop first vertex
+            path = qq.dequeue()
+            #if not visited
+            if path[-1] not in visited:
+                #DO THE THING!!!
+                print(path[-1])
+                #mark as visited
+                visited.add(path[-1])
+                #enquqe all neighbors
+                if path[-1] == destination_vertex:
+                    return path
+                for next_vert in self.get_neighbors(path[-1]):
+                    new_path = list(path)
+                    new_path.append(next_vert)
+                    qq.enqueue(new_path)
+
+    def get_neighbors(self, user_id):
+        """
+        Get all neighbors (edges) of a vertex.
+        """
+        if user_id in self.users:
+            return self.friendships[user_id]
+        else:
+            return None
+            #might want to raise an exception here instad   
+    
     def get_all_social_paths(self, user_id):
         """
         Takes a user's user_id as an argument
@@ -86,7 +128,17 @@ class SocialGraph:
         The key is the friend's ID and the value is the path.
         """
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+        visited.update({user_id: [user_id]})
+        for i in self.friendships:
+            if user_id in self.friendships[i]:
+                visited.update({i: self.bfs(user_id, i)})
+                for num in self.friendships[i]:
+                    if num in visited:
+                        continue
+                    visited.update({num: self.bfs(user_id, num)})
+                    
+
+
         return visited
 
 

@@ -1,0 +1,53 @@
+takes userID and returns a dictionary containing every user in that
+user's extended network along with the shortest friendship
+path between each.
+
+bfs add function and implement it for this class
+
+run bfs on user and all in his network self.friendships
+
+loop through self.friendships:
+    1)for first append user_id: [user_id] to dict
+
+    2)take every one that has user_id in the value set and append their
+    number as key and their shortest path as value into visited
+
+    3)loop again through set value and run bfs on each value in 
+    sets that had 1 in them
+    -also noted that all the paths in sln start with user_id
+
+    4) figure how to handle the 7 case below
+
+    5) set sg.friendships to example and run to check
+
+    maybe if self.bfs(user_id, num)[0] == user_id update
+1 and 10
+10 and 2 
+2 and 7
+```
+>>> sg = SocialGraph()
+>>> sg.populate_graph(10, 2)
+>>> print(sg.friendships)
+{1: {8, 10, 5}, 2: {10, 5, 7}, 3: {4}, 4: {9, 3},
+5: {8, 1, 2}, 6: {10}, 7: {2}, 8: {1, 5}, 9: {4}, 10: {1, 2, 6}}
+>>> connections = sg.get_all_social_paths(1)
+>>> print(connections)
+{1: [1], 8: [1, 8], 10: [1, 10], 5: [1, 5], 2: [1, 10, 2],
+ 6: [1, 10, 6], 7: [1, 10, 2, 7]}
+```
+
+
+1: {8, 10, 5}
+5: {8, 1, 2}
+8: {1, 5}
+10: {1, 2, 6}
+
+
+{1: {9, 5}, 2: set(), 3: {8}, 4: {9, 5, 7}, 5: {1, 4, 6, 7},
+6: {5}, 7: {10, 4, 5}, 8: {9, 3}, 9: {8, 1, 4}, 10: {7}}
+
+5: {1, 4, 6, 7}
+9: {8, 1, 4}
+
+{1: [1], 5: [1, 5], 4: [1, 9, 4], 6: [1, 5, 6],
+ 7: [1, 5, 7], 9: [1, 9], 8: [1, 9, 8]}
