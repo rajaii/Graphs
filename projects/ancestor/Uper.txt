@@ -1,9 +1,11 @@
 dft
 
 returns their earliest known ancestor – the one at the farthest 
-distance from the input individual. If there is more than one
+distance from the input individual. 
+If there is more than one
 ancestor tied for "earliest", return the one with the lowest 
-numeric ID. If the input individual has no parents, the 
+numeric ID. 
+If the input individual has no parents, the 
 function should return -1.
 (parent, child)
 10
@@ -18,10 +20,7 @@ P:
 initiate graph
 append all values into the graph vertex and then edges
 
-run a dfs on the  graph and find the one looked for longest path
-to input
-
-
+Maybe invert values after -1 case and run dft and return end of path?
 
 
 e:

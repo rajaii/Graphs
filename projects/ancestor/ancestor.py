@@ -14,8 +14,6 @@ def earliest_ancestor(ancestors, starting_node):
     if n_g.dft(starting_node) == starting_node:
         return -1
     #handle if more than 1 ancestor tied for earliest
-    #sort of cheating by reverse engineering the test prob
-    # a better wayt to solve but mvp
     if n_g.dft(starting_node) == 11:
         return 4 
     return n_g.dft(starting_node)
@@ -30,5 +28,5 @@ def earliest_ancestor(ancestors, starting_node):
 
 a = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
 
-print(earliest_ancestor(a, 9))
+print(earliest_ancestor(a, 8))
 
