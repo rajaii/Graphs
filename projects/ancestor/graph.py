@@ -24,7 +24,7 @@ class Graph:
             #add edge
             self.vertices[v1].add(v2)
         else:
-            print('Error adding edge: vertex not found')
+            print(f'Error adding edge: vertex not found for ({v1}, {v2})')
 
     def get_neighbors(self, vertex_id):
         """
@@ -79,9 +79,9 @@ class Graph:
             # dequue/pop first vertex
             path = ss.pop()
             #if not visited
+            
             if path[-1] not in visited:
                 #DO THE THING!!!
-                print(path[-1])
                 #mark as visited
                 visited.add(path[-1])
                 #enquqe all neighbors
@@ -90,6 +90,9 @@ class Graph:
                     new_path = list(path)
                     new_path.append(next_vert)
                     ss.push(new_path)
+                    print(new_path)
+                
+        return path[-1]
 
     def dft_recursive(self, starting_vertex, visited=None):
         """
